@@ -17,6 +17,7 @@ $(function () {
   $("#sign-out").on("click", signout);
 
   $("#unfav").on("click", unfav);
+});
 
 var token = localStorage.getItem('token')
 
@@ -69,7 +70,7 @@ function getResults (event) {
   }).done(function (res) {
     console.log(res)
     console.log('test')
-  // location.reload()
+    location.reload()
   })
 }
 
@@ -316,10 +317,10 @@ $(document).on('click', '#rec-del', function () {
 })
 
 $(document).on('click', '#add-img-ing', function () {
-  var ingredientsArr = []
+  var ingredientsArr = [];
   $('.img-ingredients').each(function () {
     ingredientsArr.push($(this).attr('value'))
-  })
+  });
   console.log(ingredientsArr)
 
   var data = {
@@ -335,7 +336,7 @@ $(document).on('click', '#add-img-ing', function () {
     url: '/api/ingredients',
     data: data
   }).done(function (res) {
-    console.log('redirect')
+    console.log('redirect');
   })
-  window.location.href = '/ingredients'
-})
+  window.location.href = '/ingredients';
+});
