@@ -12,12 +12,11 @@ $(function () {
 
   $('#get-results').on('click', getResults)
 
-  $('#sign-up').on('click', signup)
+  $('#sign-up').on('click', signup);
 
-  $('#sign-out').on('click', signout)
+  $("#sign-out").on("click", signout);
 
-  $('#unfav').on('click', unfav)
-})
+  $("#unfav").on("click", unfav);
 
 var token = localStorage.getItem('token')
 
