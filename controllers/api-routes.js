@@ -27,7 +27,6 @@ router.post("/api/ingredients", function (req, res) {
         res.sendStatus(404)
       }
     });
-
   }
 });
 
@@ -70,6 +69,7 @@ router.post("/api/recipes/all", function (routeReq, routeRes) {
 });
 
 router.post('/ingredients/image_recognition', function (req, res) {
+  console.log(req.body.UserId);
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
   }
@@ -81,13 +81,24 @@ router.post('/ingredients/image_recognition', function (req, res) {
   ingredientImage.mv(image, function (err) {
     if (err)
       return res.status(500).send(err);
+    });
     googleVision.labelDetection(image, function (data) {
       var hbsObject = {
-        imageArr: data
+        imageArr: data,
+        image_path: image
       }
-      console.log('rendering..');
-      res.render('ingredientsImageRec', hbsObject);
-    });
+
+      // for (var i = 0; i < data.length; i++) {
+      //   db.Ingredient.create({
+      //     name: data[i],
+      //     UserId: req.body.UserId
+      //   });
+      // }
+      // console.log('rendering..');
+      res.render("ingredientsImageRec", hbsObject);
+      // res.send(true);
+
+      //res.json(hbsObject);
   });
   console.log(req.files.uploadedIngredient)
 });

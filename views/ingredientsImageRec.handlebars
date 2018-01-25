@@ -9,12 +9,10 @@
 <div class="row" id="ingredient-form-container">
     <div class="col"></div>
     <div class="col-6">
-        <form ref='uploadForm' id='uploadForm ingredient-form' action='/ingredients/image_recognition' 
-        method='post' encType="multipart/form-data">
+        <form ref='uploadForm' id='uploadForm ingredient-form' action='/ingredients/image_recognition' method='post' encType="multipart/form-data">
             <input type="file" name="uploadedIngredient" />
-            <input type='submit' value='Upload!' />
-            <button type="submit" class="btn btn-warning" id="get-results">Get Recipes</button>
-        </form>
+            <!--data-toggle="modal" data-target="#results-modal"-->
+            <input type='submit' id="upload-btn" value='Upload!' />
         </form>
     </div>
     <div class="col"></div>
@@ -23,9 +21,11 @@
 
 <div class="row" id="ingredient-tracker">
     <div class="col"></div>
-    <div class="col-8" id="ing-row">
-        {{#each imageArr}}<button class="ingredients btn btn-primary">{{this}}</button> {{/each}}
+    <div class="col-8">
+        {{#each imageArr}}
+        <button class="img-ingredients btn btn-primary" value={{this}}>{{this}}</button> {{/each}}
     </div>
+    <button type="submit" class="btn btn-warning" id="add-img-ing">Add Ingredients</button>
     <div class="col"></div>
 </div>
 
@@ -33,4 +33,29 @@
     <div class="col"></div>
     <div class="col-10" id="rec-row"></div>
     <div class="col"></div>
+</div>
+
+<!-- Modal -->
+<div id="results-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">
+                    <strong>WE THINK YOUR FOOD IS...</strong>
+                </h2>
+            </div>
+            <div class="modal-body">
+                <h2 id="match-name"></h2>
+                <h2 id="match-age"></h2>
+                <img class="img-responsive" id="match-img" src={{hbsObject.images}} alt="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
 </div>

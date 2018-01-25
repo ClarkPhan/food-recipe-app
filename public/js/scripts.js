@@ -11,8 +11,8 @@ $(function () {
 
   $("#sign-up").on("click", signup);
 
-  $("#sign-out").on("click", signout)
-
+  $("#sign-out").on("click", signout);
+  
   populate();
 
   populateRec();
@@ -68,7 +68,7 @@ function getResults() {
   }).done(function (res) {
     console.log(res);
     console.log("test");
-    location.reload();
+    //location.reload();
   });
 };
 
@@ -227,3 +227,51 @@ $(document).on('click', '.ingredients', function () {
     location.reload();
   });
 });
+
+$(document).on('click', '.img-ingredients', function () {
+  $(this).remove();
+  var data = {
+    UserId: localStorage.getItem('id'),
+    name: $(this).val()
+  };
+  $.ajax({
+    method: "DELETE",
+    url: "/api/ingredients/delete",
+    data: data
+  }).then(function (data) {
+    console.log(data);
+  });
+});
+
+$(document).on('click', '#add-img-ing', function () {
+  var ingredientsArr = [];
+  $(".img-ingredients").each(function() {
+    ingredientsArr.push($(this).attr('value'))
+  })
+  console.log(ingredientsArr);
+
+  var data = {
+    UserId: localStorage.getItem('id'),
+    ingredients: ingredientsArr
+  };
+
+  $.ajax({
+    headers: {
+      "Authorization": "Bearer " + token
+    },
+    method: "POST",
+    url: "/api/ingredients",
+    data: data
+  }).done(function (res) {
+    console.log("redirect");
+  });
+  window.location.href = "/ingredients";
+});
+
+// when user clicks upload button 
+// send a POST request with the image data 
+
+// while waiting for POST to finish 
+  // show spinner 
+//when done  
+  // show modal
