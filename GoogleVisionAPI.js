@@ -11,7 +11,7 @@ function labelDetection (imageURL, cb) {
   .labelDetection(imageURL)
   .then(results => {
     var labels = results[0].labelAnnotations;
-    for (var i = 0; i < labels.length; i++) {
+    for (var i = 0; i < 5; i++) {
       labelsArr.push(labels[i].description);
     }
     cb(labelsArr);
