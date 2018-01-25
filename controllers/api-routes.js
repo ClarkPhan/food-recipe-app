@@ -103,8 +103,6 @@ router.delete("/api/recipes/remove/:id", function (req, res) {
   });
 });
 
-router.post('/', function (req, res) {
-
 router.post('/ingredients/image_recognition', function (req, res) {
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
