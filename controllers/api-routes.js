@@ -115,25 +115,17 @@ router.post('/ingredients/image_recognition', function (req, res) {
   ingredientImage.mv(image, function (err) {
     if (err)
       return res.status(500).send(err);
+      googleVision.labelDetection(image, function (data) {
+        var hbsObject = {
+          imageArr: data,
+          image_path: image
+        }
+  
+        res.render("ingredientsImageRec", hbsObject);
+  
+        //res.json(hbsObject);
+      });
     });
-    googleVision.labelDetection(image, function (data) {
-      var hbsObject = {
-        imageArr: data,
-        image_path: image
-      }
-
-      // for (var i = 0; i < data.length; i++) {
-      //   db.Ingredient.create({
-      //     name: data[i],
-      //     UserId: req.body.UserId
-      //   });
-      // }
-      // console.log('rendering..');
-      res.render("ingredientsImageRec", hbsObject);
-      // res.send(true);
-
-      //res.json(hbsObject);
-  });
   console.log(req.files.uploadedIngredient)
 });
 
