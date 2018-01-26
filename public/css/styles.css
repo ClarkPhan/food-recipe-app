@@ -1,5 +1,7 @@
+
 body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f0efef;
 }
 
 h1,
@@ -10,6 +12,10 @@ h5,
 h6 {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
+}
+
+#fav,#rec-del, #unfav {
+  float: right;
 }
 
 header.masthead {
@@ -145,6 +151,11 @@ footer.footer {
   height: 200px;
 }
 
+#img-ingredient-tracker {
+  padding-top: 30px;
+  height: 130%;
+}
+
 #ingredient-form {
   width: 100%;
 }
@@ -166,14 +177,26 @@ footer.footer {
 #recipe-tracker {
   margin-bottom: 20px;
 }
+
 .recipes {
-  width: 32.5%;
-  margin-left: 2px;
-  margin-right: 2px;
-  display: inline-block;
+  width: 33%;
 }
 
+.card-title {
+  font-size: 120%;
+}
 
+.card {
+  height: 350px;
+}
+
+#add-img-ing {
+  margin-bottom: 50px;
+}
+
+#image-ingredient-form {
+  padding-top: 20px;
+}
 /* ******** LOGIN FORM STYLING ******** */
 .form-signin {
   width: 100%;

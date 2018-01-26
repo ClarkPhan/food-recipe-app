@@ -4,6 +4,7 @@ var db = require("../models");
 // For AJAX request calls
 var request = require("request");
 var path = require('path');
+var googleVision = require('../GoogleVisionAPI.js');
 
 router.post("/api/ingredients", function (req, res) {
   console.log(req.body);
@@ -26,7 +27,6 @@ router.post("/api/ingredients", function (req, res) {
         res.sendStatus(404)
       }
     });
-
   }
 });
 
@@ -68,11 +68,46 @@ router.post("/api/recipes/all", function (routeReq, routeRes) {
   });
 });
 
-router.post('/', function (req, res) {
+
+router.post("/api/recipes/favorite/:id", function (req, res) {
+  db.Recipe.update({
+    favorited: true
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).done(function (data) {
+    res.json(data);
+  });
+});
+
+router.post("/api/recipes/unfavorite/:id", function (req, res) {
+  db.Recipe.update({
+    favorited: false
+  }, {
+    where: {
+      id: req.params.id
+    }
+  }).done(function (data) {
+    res.json(data);
+  });
+});
+
+router.delete("/api/recipes/remove/:id", function (req, res) {
+  db.Recipe.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).done(function (data) {
+    res.json(data);
+  });
+});
+
+router.post('/ingredients/image_recognition', function (req, res) {
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
   }
-  var filePath = "/uploadedImages/";
+  var filePath = "../uploadedImages/";
 
   var ingredientImage = req.files.uploadedIngredient;
 
@@ -80,13 +115,17 @@ router.post('/', function (req, res) {
   ingredientImage.mv(image, function (err) {
     if (err)
       return res.status(500).send(err);
-    googleVision.labelDetection(image, function (data) {
-      var hbsObject = {
-        imageArr: data
-      }
-      res.render('index', hbsObject);
+      googleVision.labelDetection(image, function (data) {
+        var hbsObject = {
+          imageArr: data,
+          image_path: image
+        }
+  
+        res.render("ingredientsImageRec", hbsObject);
+  
+        //res.json(hbsObject);
+      });
     });
-  });
   console.log(req.files.uploadedIngredient)
 });
 

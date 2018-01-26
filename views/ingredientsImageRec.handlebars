@@ -1,0 +1,43 @@
+<!-- Navigation -->
+<!-- Navigation -->
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Lazyfood</a>
+        <div>
+            <a class="btn btn-primary" href="/ingredients/">Ingredient Manager</a>
+            <a class="btn btn-primary" href="/" id="sign-out">Sign Out</a>
+        </div>
+    </div>
+</nav>
+
+<div class="row" id="ingredient-form-container">
+</div>
+
+
+<div class="row" id="image-ingredient-form">
+    <div class="col"></div>
+    <div class="col-6">
+        <form ref='uploadForm' id='uploadForm' action='/ingredients/image_recognition' method='post' encType="multipart/form-data">
+            <input type="file" name="uploadedIngredient" class="btn btn-warning" />
+            <input type='submit' id="upload-btn" value='Upload!' class="btn btn-warning" />
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
+
+<div class="row" id="img-ingredient-tracker">
+    <div class="col"></div>
+    <div class="col-8">
+        {{#each imageArr}}
+        <button class="img-ingredients btn btn-primary" value={{this}}>{{this}}</button> {{/each}}
+    </div>
+    <div class="col"></div>
+</div>
+
+<div class="row" id="image-ingredient-form">
+    <div class="col"></div>
+    <div class="col-6">
+            <button type="submit" class="btn btn-warning" id="add-img-ing">Add Ingredients</button>
+    </div>
+    <div class="col"></div>
+</div>
