@@ -107,7 +107,7 @@ router.post('/ingredients/image_recognition', function (req, res) {
   if (!req.files) {
     return res.status(400).send('No files were uploaded.');
   }
-  var filePath = "/uploadedImages/";
+  var filePath = "../uploadedImages/";
 
   var ingredientImage = req.files.uploadedIngredient;
 
