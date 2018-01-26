@@ -173,7 +173,7 @@ function populateRec () {
       panel.addClass('card')
       panel.attr('id', 'recipe-' + i)
 
-      var title = $('<h5>')
+      var title = $('<p>')
       title.addClass('card-title')
       title.text(data[i].name)
 
