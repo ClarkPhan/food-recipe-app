@@ -139,9 +139,9 @@ function yummlyIngredientSearch(ingredientArr, UserId, routeRes) {
       allowedIngredients += '&allowedIngredient[]=' + ingredientArr[i];
     }
     console.log(allowedIngredients);
-
+    var appId = String(process.env.app_id);
     // Query string to get recipe data associated with ingredients
-    var query = 'http://api.yummly.com/v1/api/recipes?_app_id=' + process.env.app_id +
+    var query = 'http://api.yummly.com/v1/api/recipes?_app_id=' + appId +
       '&_app_key=' + process.env.app_key + allowedIngredients;
     console.log(query);
     request(query, function (err, res, bod) {
